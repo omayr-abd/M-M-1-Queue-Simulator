@@ -1,0 +1,18 @@
+class EventList extends LinkedList {
+    
+    public EventList() {
+        super();
+    }
+    
+    public Object getMin() {        
+        return getFirst();        
+    }
+        
+    public void enqueue(Object _o) {
+        add(_o);
+    }
+    
+    public void dequeue() {
+        removeFirst();
+    }
+}

@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Controller {
+  
+  public static void main(String argv[]) {
+    Calendar eventCalendar = new Calendar(); //Initialize the calendar
+    MM1 queue = new MM1(60.0,.015,eventCalendar);
+    double clock = 0.0;
+    Event firstEvent = new Event("first");   //Initialize the first event
+    queue.function(clock,firstEvent);
+    
+    // Loop until specified simulation time
+    while (clock < 200) {
+      Event evt = (Event) eventCalendar.getMin(); //Get imminent event from calendar
+      clock = evt.getEventTime();                 //Advance simulation time
+      queue.function(clock,evt);                  //Leave it to the MM1 queue function to determine what to do with the item
+      //eventCalendar.dequeue();                    //Dequeue event from calendar
+    }
+  }
+  
+}

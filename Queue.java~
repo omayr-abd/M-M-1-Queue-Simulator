@@ -1,0 +1,10 @@
+class Queue extends LinkedList {
+    
+    public void enqueue(Object _o) {
+        add(_o);        
+    }
+    
+    public Object dequeue() {
+        return removeFirst();
+    }
+}// Queue

@@ -1,0 +1,20 @@
+import java.util.*;
+
+class Calendar extends LinkedList {
+  
+  public Calendar() {
+    super();
+  }
+  
+  public Object getMin() {        
+    return getFirst();        
+  }
+  
+  public void enqueue(Object eventObj) {
+    add(eventObj);
+  }
+  
+  public void dequeue() {
+    removeFirst();
+  }
+}

@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class MM1 {
+  Calendar eventCalendar;
+  double totalTime;
+  double lambda;
+  double Ts;
+  double nextBirthTime;
+  double nextDeathTime;
+  int count;
+  double Q;
+  double Tq;
+  double W;
+  double Tw;
+  
+  Random rng = new Random(System.nanoTime());
+  
+  //Constructors
+  public MM1(){
+  }
+  public MM1(double arrivalRate, double serviceTime, Calendar _eventCalendar) {
+    lambda = arrivalRate;
+    Ts = serviceTime;
+    eventCalendar = _eventCalendar;
+  }
+  
+  //Function
+  public void function(double time,Event e){
+    totalTime = time;                            //set the totalTime equal to the input time
+    if (e.isFirst()){                             //check if its the first event
+      count++;                                   //if it is, increment count by 1.
+    double randnum = rng.nextDouble();           //create a random number
+    double expNumerator = Math.log(1 - randnum); //create the numerator for the exponential distribution equation
+    nextBirthTime = (expNumerator / (-lambda));  //exponentially distributed time for next birth
+    nextDeathTime = (expNumerator / (1.0/-Ts));    //time for next death
+    Event nextEvent = new Event("birth",nextBirthTime,nextDeathTime,time); //insert the official first event
+    totalTime += nextBirthTime;                  //add the next birth time to the total time
+    eventCalendar.enqueue(nextEvent);            //queue the event into the calendar
+    
+    randnum = rng.nextDouble();                  //create a new random number
+    expNumerator = Math.log(1 - randnum);        //create the numerator for the exponential distribution equation
+    nextBirthTime = (expNumerator / (-lambda));  //amount of time until the new birth.
+    }
+    
+  }
+}
